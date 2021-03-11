@@ -1,13 +1,10 @@
-import sys, pygame
+import pygame
 from settings import Setting
-from back import Bg2
-from yes import Yes
-from no import No 
+from buttons import *
 from question import Question
 from stats import Stats
-from functions import*
+from functions import *
 from score import Scoreboard
-from play_button import Play
 from timeline import Timeline
 def run():
     pygame.init()
@@ -18,8 +15,8 @@ def run():
     pygame.display.set_caption("Math Battle")
     bg2=Bg2(screen)
     ques=Question(screen, st)
-    yes=Yes(screen)
-    no=No(screen)
+    yes=YesNo(screen, 'yes')
+    no=YesNo(screen, 'no')
     play=Play(screen)
     stat=Stats(st)
     time=Timeline(screen, stat)

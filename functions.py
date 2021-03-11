@@ -1,5 +1,7 @@
-import sys, pygame, random
-import time as t
+import sys, pygame
+from time import time as ttime
+from time import sleep
+from random import choice, randint
 def check_keydown(event, ques, stat, score, time):
     if event.key==pygame.K_RIGHT:
         ques.yesno=False
@@ -22,7 +24,7 @@ def endgame(stat, ques):
         stat.game_active=False
         stat.reset_stats()
         gettype(ques, stat)
-        t.sleep(2)
+        sleep(2)
 
 
 def startgame(stat, score):
@@ -30,7 +32,7 @@ def startgame(stat, score):
     stat.game_active=True
     score.prep_top()
     score.prep_score()
-    stat.endtime=t.time()+15
+    stat.endtime=ttime()+15
     print(stat.endtime)
 
 def activenot(ques, yes, no, play, time, stat):
@@ -38,7 +40,7 @@ def activenot(ques, yes, no, play, time, stat):
         ques.show_q()
         yes.blitme()
         no.blitme()
-        stat.current=t.time()
+        stat.current=ttime()
         stat.timeleft=stat.endtime-stat.current
         if stat.timeleft<=0:
             stat.game_active=False
@@ -89,7 +91,7 @@ def mousekey(ques, stat, score, play, time, yes, no, x, y):
         checktruefalse(ques, stat, score, time)
 
 def gettype(ques, stat):
-    ques.sign=random.choice(['+','-','*','/'])
+    ques.sign=choice(['+','-','*','/'])
     if ques.sign=='+':
         plus(ques, stat)
     elif ques.sign=='-':
@@ -100,18 +102,18 @@ def gettype(ques, stat):
         divide(ques, stat)
 
 def wrongans(ques, stat):
-    if random.choice([True, False]):
-        ques.ans=ques.tans+random.randint(1, stat.score+1)
+    if choice([True, False]):
+        ques.ans=ques.tans+randint(1, stat.score+1)
     else:
         while ques.ans<=0:
-            ques.ans=ques.tans-random.randint(1, stat.score+1)
+            ques.ans=ques.tans-randint(1, stat.score+1)
     ques.prep()
 
 def plus(ques, stat):
     ques.sign='+'
-    ques.q=random.choice([True, False])
-    ques.e1=random.randint(stat.score*2, stat.score*15)
-    ques.e2=random.randint(stat.score*2, stat.score*15)
+    ques.q=choice([True, False])
+    ques.e1=randint(stat.score*2, stat.score*15)
+    ques.e2=randint(stat.score*2, stat.score*15)
     ques.tans=ques.e1+ques.e2
     if ques.q:
         ques.ans=ques.tans
@@ -121,9 +123,9 @@ def plus(ques, stat):
 
 def minus(ques, stat):
     ques.sign='-'
-    ques.q=random.choice([True, False])
-    ques.e1=random.randint(stat.score*5, stat.score*15)
-    ques.e2=random.randint(stat.score*2, ques.e1-1)
+    ques.q=choice([True, False])
+    ques.e1=randint(stat.score*5, stat.score*15)
+    ques.e2=randint(stat.score*2, ques.e1-1)
     ques.tans=ques.e1-ques.e2
     if ques.q:
         ques.ans=ques.tans
@@ -133,13 +135,13 @@ def minus(ques, stat):
 
 def multiply(ques, stat):
     ques.sign='*'
-    ques.q=random.choice([True, False])
+    ques.q=choice([True, False])
     if stat.score>15:
-        ques.e1=random.randint(5, stat.score)
-        ques.e2=random.randint(5, stat.score)
+        ques.e1=randint(5, stat.score)
+        ques.e2=randint(5, stat.score)
     else:
-        ques.e1=random.randint(stat.score, stat.score*2)
-        ques.e2=random.randint(stat.score, stat.score*2)
+        ques.e1=randint(stat.score, stat.score*2)
+        ques.e2=randint(stat.score, stat.score*2)
     ques.tans=round(ques.e1*ques.e2)
     if ques.q:
         ques.ans=ques.tans
@@ -149,13 +151,13 @@ def multiply(ques, stat):
 
 def divide(ques, stat):
     ques.sign='/'
-    ques.q=random.choice([True, False])
+    ques.q=choice([True, False])
     if stat.score>15:
-        me1=random.randint(5, stat.score)
-        me2=random.randint(5, stat.score)
+        me1=randint(5, stat.score)
+        me2=randint(5, stat.score)
     else:
-        me1=random.randint(stat.score*2, stat.score*4)
-        me2=random.randint(stat.score, stat.score*3)
+        me1=randint(stat.score*2, stat.score*4)
+        me2=randint(stat.score, stat.score*3)
     ques.e1=round(me1*me2)
     ques.e2=round(ques.e1/me1)
     ques.tans=round(ques.e1/ques.e2)
