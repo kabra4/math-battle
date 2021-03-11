@@ -7,6 +7,6 @@ In order to run game you need pygame for python3
 Launch "game.py" file to play or 
 ```python game.py```
 
-![screenshot](https://drive.google.com/file/d/1dGlOs55NGMg4ARysoqnIeJBqqmN9Bcjv/view?usp=sharing)
+![screenshot](https://user-images.githubusercontent.com/57127182/110786652-3456c200-828e-11eb-8960-16b673bb826b.png)
 
 # Have fun
