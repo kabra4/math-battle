@@ -13,7 +13,7 @@ def check_keydown(event, ques, stat, score, time):
         startgame(stat, score)
     elif event.key==pygame.K_q:
         sys.exit()
-    elif event.key==pygame.K_ESC:
+    elif event.key==pygame.K_ESCAPE:
         sys.exit()
 
 def endgame(stat, ques):
@@ -33,7 +33,6 @@ def startgame(stat, score):
     score.prep_top()
     score.prep_score()
     stat.endtime=ttime()+15
-    print(stat.endtime)
 
 def activenot(ques, yes, no, play, time, stat):
     if stat.game_active:
